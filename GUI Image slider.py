@@ -5,11 +5,11 @@ from PIL import ImageTk, Image
 root = Tk()
 
 # storing the images
-my_img_1 = ImageTk.PhotoImage(Image.open("images/d1.jpg"))
-my_img_2 = ImageTk.PhotoImage(Image.open("images/d2.jpg"))
-my_img_3 = ImageTk.PhotoImage(Image.open("images/d3.jpg"))
-my_img_4 = ImageTk.PhotoImage(Image.open("images/d4.jpg"))
-my_img_5 = ImageTk.PhotoImage(Image.open("images/d5.jpg"))
+my_img_1 = ImageTk.PhotoImage(Image.open("d1.jpg"))
+my_img_2 = ImageTk.PhotoImage(Image.open("d2.jpg"))
+my_img_3 = ImageTk.PhotoImage(Image.open("d3.jpg"))
+my_img_4 = ImageTk.PhotoImage(Image.open("d4.jpg"))
+my_img_5 = ImageTk.PhotoImage(Image.open("d5.jpg"))
 
 my_images = [my_img_1, my_img_2, my_img_3, my_img_4, my_img_5]
 
@@ -23,18 +23,28 @@ img_num = 1
 # Define a function to handle forward button clicks
 def btn_forw():
     global img_num
+    if img_num == 1:
+        prev_btn.config(state=DISABLED)
     img_num += 1
     if img_num > len(my_images): # checking if we have reached the end of image list
         img_num = 1 # back to image one
     update_display()
+    prev_btn.config(state=NORMAL if img_num > 1 else DISABLED)
+    forw_btn.config(state=NORMAL if img_num < len(my_images) else DISABLED)
+
 
 # Define a function to handle previous button clicks
 def btn_prev():
     global img_num
+    if img_num == len(my_images):
+        forw_btn.config(state=DISABLED)
     img_num -= 1
     if img_num < 1: # checking if we have reached the start of image list
         img_num = len(my_images) # reached to last image
     update_display()
+    prev_btn.config(state=NORMAL if img_num > 1 else DISABLED)
+    forw_btn.config(state=NORMAL if img_num < len(my_images) else DISABLED)
+
 
 # Update the display based on the current image number
 def update_display():
@@ -42,7 +52,7 @@ def update_display():
     img_num_label.config(text=f"Image {img_num}/{len(my_images)}") # same with this line
 
 # Create navigation buttons
-prev_btn = Button(root, text="<<", command=btn_prev)
+prev_btn = Button(root, text="<<", command=btn_prev, state=DISABLED)
 exit_btn = Button(root, text="Exit app", command=root.quit)
 forw_btn = Button(root, text=">>", command=btn_forw)
 
