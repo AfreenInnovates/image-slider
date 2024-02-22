@@ -8,7 +8,7 @@
 
 • Article explaining the project (published in Young Scientists Journal): https://www.youngscientistsjournal.com/post/building-a-simple-image-viewer-with-tkinter-and-pillow-in
 
-
+<br><br><br>
 
 
 freeCodeCamp source code for comparison: https://github.com/flatplanet/Intro-To-TKinter-Youtube-Course/blob/master/viewer.py
